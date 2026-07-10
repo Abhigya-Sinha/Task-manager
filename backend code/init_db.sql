@@ -1,8 +1,3 @@
--- ============================================================
---  init_db.sql  --  Task Manager Database Initialization
---  Run once:  mysql -u root -p < init_db.sql
--- ============================================================
-
 CREATE DATABASE IF NOT EXISTS task_manager_db;
 USE task_manager_db;
 
