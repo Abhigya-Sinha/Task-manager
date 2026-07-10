@@ -1,13 +1,8 @@
-# =============================================================
-#  models.py  --  Database Helper Functions  (SQLite)
-#  Uses Python's built-in sqlite3 — no installation needed!
-# =============================================================
-
 import sqlite3
 from config import DB_PATH
 
 
-# ── Connection ────────────────────────────────────────────────
+# ── Connection 
 
 def get_connection():
     """Return a SQLite connection with dict-like row access."""
@@ -16,7 +11,7 @@ def get_connection():
     return conn
 
 
-# ── Init DB (called once on first run) ────────────────────────
+#Init DB (called once on first run) 
 
 def init_db():
     """Create the tasks table and seed sample data if empty."""
