@@ -1,7 +1,3 @@
-# config.py — SQLite Configuration
-# The database is a single file stored in the backend folder.
-# No server, no password, no setup needed!
-
 import os
 
 # Path to the SQLite database file
