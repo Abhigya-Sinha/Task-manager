@@ -1,26 +1,14 @@
-/* ================================================================
-   app.js  --  Task Manager Frontend  |  Vanilla JavaScript
-   Responsibilities:
-     - Load tasks on startup
-     - CRUD operations via Fetch API → Flask backend
-     - Search / filter logic
-     - Modal handling (add, edit, delete)
-     - Dashboard statistics updates
-     - Toast notifications
-     - Skeleton loading states
-   ================================================================ */
-
 "use strict";
 
-// ── Configuration ─────────────────────────────────────────────
+// ── Configuration
 const API_BASE = "http://localhost:5000/api";
 
-// ── State ─────────────────────────────────────────────────────
+// ── State 
 let tasks         = [];        // current task list shown
 let editMode      = false;     // true → PUT, false → POST
 let deleteTaskId  = null;      // id pending deletion
 
-// ── DOM references ────────────────────────────────────────────
+// ── DOM references 
 const tbody        = document.getElementById("tbody");
 const tblCount     = document.getElementById("tbl-count");
 const inpSearch    = document.getElementById("inp-search");
@@ -49,10 +37,6 @@ const errTitle     = document.getElementById("err-title");
 const delOverlay   = document.getElementById("del-overlay");
 const btnDelConf   = document.getElementById("btn-del-confirm");
 
-
-// ═══════════════════════════════════════════════════════════════
-//  UTILITIES
-// ═══════════════════════════════════════════════════════════════
 
 /** Escape HTML to prevent XSS */
 function esc(str) {
@@ -101,10 +85,7 @@ function animateNum(el, target) {
   }, 28);
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  TOAST NOTIFICATIONS
-// ═══════════════════════════════════════════════════════════════
 
 const ICONS = { success: "✅", error: "❌", info: "ℹ️" };
 
@@ -120,10 +101,7 @@ function toast(msg, type = "success") {
   }, 3400);
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  STATS
-// ═══════════════════════════════════════════════════════════════
 
 async function loadStats() {
   try {
@@ -138,10 +116,7 @@ async function loadStats() {
   } catch (_) { /* ignore */ }
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  FETCH & RENDER TASKS
-// ═══════════════════════════════════════════════════════════════
 
 async function loadTasks() {
   renderSkeleton();
@@ -247,10 +222,7 @@ function renderTable(list) {
   }).join("");
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  ADD MODAL
-// ═══════════════════════════════════════════════════════════════
 
 function openAdd() {
   editMode = false;
@@ -268,10 +240,7 @@ function closeForm() {
   formOverlay.classList.remove("open");
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  EDIT MODAL
-// ═══════════════════════════════════════════════════════════════
 
 function openEdit(id) {
   const task = tasks.find(t => t.task_id === id);
@@ -292,10 +261,7 @@ function openEdit(id) {
   setTimeout(() => fEmp.focus(), 80);
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  FORM VALIDATION & SUBMIT
-// ═══════════════════════════════════════════════════════════════
 
 function clearErrors() {
   errEmp.classList.remove("show");
@@ -358,10 +324,7 @@ taskForm.addEventListener("submit", async e => {
   }
 });
 
-
-// ═══════════════════════════════════════════════════════════════
 //  QUICK TOGGLE COMPLETION
-// ═══════════════════════════════════════════════════════════════
 
 async function handleToggle(id, current) {
   try {
@@ -382,10 +345,7 @@ async function handleToggle(id, current) {
   }
 }
 
-
-// ═══════════════════════════════════════════════════════════════
 //  DELETE
-// ═══════════════════════════════════════════════════════════════
 
 function openDelete(id) {
   deleteTaskId = id;
@@ -416,11 +376,6 @@ btnDelConf.addEventListener("click", async () => {
     btnDelConf.textContent  = "Delete";
   }
 });
-
-
-// ═══════════════════════════════════════════════════════════════
-//  EVENT WIRING
-// ═══════════════════════════════════════════════════════════════
 
 // Header add button
 document.getElementById("btn-open-add").addEventListener("click", openAdd);
@@ -455,9 +410,6 @@ inpSearch.addEventListener("input", () => {
 selStatus.addEventListener("change", loadTasks);
 
 
-// ═══════════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════════
 
 (async function init() {
   await Promise.all([loadStats(), loadTasks()]);
