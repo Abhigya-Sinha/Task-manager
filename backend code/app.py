@@ -1,14 +1,3 @@
-# =============================================================
-#  app.py  --  Flask REST API  |  Task Manager
-#  Endpoints:
-#    GET    /api/tasks          list / search / filter tasks
-#    GET    /api/tasks/<id>     get single task
-#    POST   /api/tasks          create task
-#    PUT    /api/tasks/<id>     update task
-#    DELETE /api/tasks/<id>     delete task
-#    GET    /api/stats          dashboard statistics
-# =============================================================
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import models
@@ -20,7 +9,7 @@ CORS(app)   # allow frontend (file://) to reach the API
 models.init_db()
 
 
-# ── Helpers ───────────────────────────────────────────────────
+# ── Helpers 
 
 def serialize(task):
     """Convert a DB row dict to a JSON-safe dict."""
